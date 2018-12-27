@@ -13,5 +13,9 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
+- script: | 
+    dotnet build --configuration $(buildConfiguration)
+    dotnet publish ./src/WebApiProxyFunctionApp/WebApiProxyFunctionApp.csproj -o $(Build.ArtifactStagingDirectory)
   displayName: 'dotnet build $(buildConfiguration)'
+
+- task: PublishBuildArtifacts@1
